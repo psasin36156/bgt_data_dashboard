@@ -66,7 +66,7 @@ if address:
 st.subheader("Distribution of Total Balance by Range")
 
 # Define the bins for the ranges
-bins = [1, 10, 100, 500, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000]
+bins = [1, 10, 100, 500, 1000, 10000, 100000, 1000000, 10000000, 100000000]
 labels = ['1-10', '10-100', '100-500', '500-1000', '1000-10000', '10000-100000', '100000-1M', '1M-10M', '10M-100M']
 
 # Cut the Balance data into bins
