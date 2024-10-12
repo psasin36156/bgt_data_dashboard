@@ -50,7 +50,7 @@ address = st.text_input("Enter your wallet address:")
 if address:
     if address == '0xcD6e45Aa577dd494C619D02Fc302f2FBBC3c6D29':
         st.success("Shhh ! Bear secret 🐻🐻🐻")
-    elif address in df['HolderAddress'].values:
+    elif address in df['HolderAddress'].values and df[df['HolderAddress'] == address]['Balance'].values[0] >= 1000 :
         # Sort the dataframe by Balance in descending order and reset the index
         sorted_df = df.sort_values('Balance', ascending=False).reset_index(drop=True)
         
@@ -58,9 +58,36 @@ if address:
         rank = sorted_df[sorted_df['HolderAddress'] == address].index[0] + 1  # Adding 1 because index starts at 0
         
         amount = df[df['HolderAddress'] == address]['Balance'].values[0]
-        st.success(f"Your wallet rank is {rank} with an amount of {amount:.2f} $BGT")
+        st.success(f"OOGA BOOGA! BIG FAT BEAR 🐻🐻🐻 wallet rank {rank} with an amount of {amount:.2f} $BGT")
+    elif address in df['HolderAddress'].values and df[df['HolderAddress'] == address]['Balance'].values[0] >= 100 :
+        # Sort the dataframe by Balance in descending order and reset the index
+        sorted_df = df.sort_values('Balance', ascending=False).reset_index(drop=True)
+        
+        # Find the index of the address, which will be its rank
+        rank = sorted_df[sorted_df['HolderAddress'] == address].index[0] + 1  # Adding 1 because index starts at 0
+        
+        amount = df[df['HolderAddress'] == address]['Balance'].values[0]
+        st.success(f"OOGA BOOGA! CHUBBY BEAR 🐻🐻 wallet rank {rank} with an amount of {amount:.2f} $BGT")
+    elif address in df['HolderAddress'].values and df[df['HolderAddress'] == address]['Balance'].values[0] >= 10 :
+        # Sort the dataframe by Balance in descending order and reset the index
+        sorted_df = df.sort_values('Balance', ascending=False).reset_index(drop=True)
+        
+        # Find the index of the address, which will be its rank
+        rank = sorted_df[sorted_df['HolderAddress'] == address].index[0] + 1  # Adding 1 because index starts at 0
+        
+        amount = df[df['HolderAddress'] == address]['Balance'].values[0]
+        st.success(f"OOGA BOOGA! little BEAR cub 🐻 wallet rank {rank} with an amount of {amount:.2f} $BGT")
+    elif address in df['HolderAddress'].values and df[df['HolderAddress'] == address]['Balance'].values[0] >= 1 :
+        # Sort the dataframe by Balance in descending order and reset the index
+        sorted_df = df.sort_values('Balance', ascending=False).reset_index(drop=True)
+        
+        # Find the index of the address, which will be its rank
+        rank = sorted_df[sorted_df['HolderAddress'] == address].index[0] + 1  # Adding 1 because index starts at 0
+        
+        amount = df[df['HolderAddress'] == address]['Balance'].values[0]
+        st.success(f"OOGA BOOGA! You're still a SBERM 🐻 wallet rank {rank} with an amount of {amount:.2f} $BGT")
     else:
-        st.error("Address not found in the dataset(this dashboard only show wallet that holding more than 1 BGT).")
+        st.error("You're not even a BEAR 🐻 get outta here! (this dashboard only show wallet that holding >= 1 BGT).")
 
 ########################################################################################
 ########################################################################################
