@@ -48,8 +48,9 @@ st.header("Search Your Wallet Rank")
 address = st.text_input("Enter your wallet address:")
 
 if address:
-    # Assuming 'address' and 'amount' columns exist in the CSV
-    if address in df['HolderAddress'].values:
+    if address == '0xcD6e45Aa577dd494C619D02Fc302f2FBBC3c6D29':
+        st.success("Shhh ! Bear secret 🐻🐻🐻")
+    elif address in df['HolderAddress'].values:
         # Sort the dataframe by Balance in descending order and reset the index
         sorted_df = df.sort_values('Balance', ascending=False).reset_index(drop=True)
         
@@ -86,21 +87,17 @@ pie_data = pd.DataFrame({
 })
 
 earth_tones = [
-    "#8B4513",  # Saddle Brown
-    "#A0522D",  # Sienna
-    "#CD853F",  # Peru
-    "#D2691E",  # Chocolate
     "#DEB887",  # Burlywood
     "#F4A460",  # Sandy Brown
-    "#D2B48C",  # Tan
-    "#FFDAB9",  # Peach Puff
-    "#F0E68C",  # Khaki
-    "#BDB76B",  # Dark Khaki
     "#6B8E23",  # Olive Drab
     "#808000",  # Olive
     "#556B2F",  # Dark Olive Green
     "#8FBC8F",  # Dark Sea Green
-    "#2F4F4F"   # Dark Slate Gray
+    "#2F4F4F",  # Dark Slate Gray
+    "#9ACD32",  # Yellow Green
+    "#DAA520",  # Goldenrod
+    "#B8860B",  # Dark Goldenrod
+    "#BDB76B",  # Dark Khaki
 ]
 # Create a pie chart
 fig = px.pie(
@@ -132,14 +129,14 @@ holders_count_df = pd.DataFrame({
     'Number of Holders': holders_count.values,
 })
 
-st.table(holders_count_df)
+st.table(holders_count_df.reset_index(drop=True))
 
 
 ########################################################################################
 ########################################################################################
 st.subheader("Top 20 Wallets (without team wallet)")
 top_20 = df.nlargest(20, 'Balance')[['HolderAddress', 'Balance']]
-st.table(top_20)
+st.table(top_20.reset_index(drop=True))
 # Add footer with additional information
 st.info("⚠️ Last data update: 12 OCT 2024 (manually updated every 3days 🥺🥺)")
 
