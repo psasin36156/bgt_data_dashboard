@@ -30,7 +30,7 @@ with col2:
 st.markdown("<br>", unsafe_allow_html=True)
 
 # Load the CSV file
-@st.cache_data
+@st.cache_data(ttl=3600)
 def load_data():
     return pd.read_csv('clean_bgt_12OCT2024.csv')
 
@@ -165,7 +165,7 @@ st.subheader("Top 20 Wallets (without team wallet)")
 top_20 = df.nlargest(20, 'Balance')[['HolderAddress', 'Balance']]
 st.table(top_20.reset_index(drop=True))
 # Add footer with additional information
-st.info("⚠️ Last data update: 12 OCT 2024 (manually updated every 3days 🥺🥺)")
+st.info("⚠️ This is not a real time data (around 3 days delay 🥺)")
 
 ########################################################################################
 ########################################################################################
@@ -174,9 +174,10 @@ st.info("⚠️ Last data update: 12 OCT 2024 (manually updated every 3days 🥺
 st.markdown("---")
 st.subheader("Contact Information")
 st.markdown("For more information or support, reach out to me on:")
-st.markdown("- Telegram: @sapiensp")
-st.markdown("- Twitter: @0xsapiensp")
-st.markdown("- Discord: @sapiensp")
+st.markdown("- Discord : sapiensp")
+st.link_button("Telegram",'https://t.me/sapiensp')
+st.link_button("Twitter",'https://x.com/0xsapiensp')
+
 
 
 # Add "Buy Me a Coffee" message with donation address
