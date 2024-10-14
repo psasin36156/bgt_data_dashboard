@@ -32,7 +32,7 @@ st.markdown("<br>", unsafe_allow_html=True)
 # Load the CSV file
 @st.cache_data(ttl=3600)
 def load_data():
-    return pd.read_csv('clean_bgt_12OCT2024.csv')
+    return pd.read_csv('clean_bgt_14OCT2024.csv')
 
 df = load_data()
 
@@ -48,46 +48,35 @@ st.header("Search Your Wallet Rank")
 address = st.text_input("Enter your wallet address:")
 
 if address:
-    if address == '0xcD6e45Aa577dd494C619D02Fc302f2FBBC3c6D29':
+    # Convert input address to lowercase
+    address_lower = address.lower()
+    
+    # Convert all addresses in the dataframe to lowercase for comparison
+    df['HolderAddressLower'] = df['HolderAddress'].str.lower()
+    
+    if address_lower == '0xcd6e45aa577dd494c619d02fc302f2fbbc3c6d29':
         st.success("Shhh ! Bear secret 🐻🐻🐻")
-    elif address in df['HolderAddress'].values and df[df['HolderAddress'] == address]['Balance'].values[0] >= 1000 :
+    elif address_lower in df['HolderAddressLower'].values:
+        # Get the balance for the address
+        balance = df[df['HolderAddressLower'] == address_lower]['Balance'].values[0]
+        
         # Sort the dataframe by Balance in descending order and reset the index
         sorted_df = df.sort_values('Balance', ascending=False).reset_index(drop=True)
-        
         # Find the index of the address, which will be its rank
-        rank = sorted_df[sorted_df['HolderAddress'] == address].index[0] + 1  # Adding 1 because index starts at 0
+        rank = sorted_df[sorted_df['HolderAddressLower'] == address_lower].index[0] + 1
         
-        amount = df[df['HolderAddress'] == address]['Balance'].values[0]
-        st.success(f"OOGA BOOGA! BIG FAT BEAR 🐻🐻🐻 wallet rank {rank} with an amount of {amount:.2f} $BGT")
-    elif address in df['HolderAddress'].values and df[df['HolderAddress'] == address]['Balance'].values[0] >= 100 :
-        # Sort the dataframe by Balance in descending order and reset the index
-        sorted_df = df.sort_values('Balance', ascending=False).reset_index(drop=True)
-        
-        # Find the index of the address, which will be its rank
-        rank = sorted_df[sorted_df['HolderAddress'] == address].index[0] + 1  # Adding 1 because index starts at 0
-        
-        amount = df[df['HolderAddress'] == address]['Balance'].values[0]
-        st.success(f"OOGA BOOGA! CHUBBY BEAR 🐻🐻 wallet rank {rank} with an amount of {amount:.2f} $BGT")
-    elif address in df['HolderAddress'].values and df[df['HolderAddress'] == address]['Balance'].values[0] >= 10 :
-        # Sort the dataframe by Balance in descending order and reset the index
-        sorted_df = df.sort_values('Balance', ascending=False).reset_index(drop=True)
-        
-        # Find the index of the address, which will be its rank
-        rank = sorted_df[sorted_df['HolderAddress'] == address].index[0] + 1  # Adding 1 because index starts at 0
-        
-        amount = df[df['HolderAddress'] == address]['Balance'].values[0]
-        st.success(f"OOGA BOOGA! little BEAR cub 🐻 wallet rank {rank} with an amount of {amount:.2f} $BGT")
-    elif address in df['HolderAddress'].values and df[df['HolderAddress'] == address]['Balance'].values[0] >= 1 :
-        # Sort the dataframe by Balance in descending order and reset the index
-        sorted_df = df.sort_values('Balance', ascending=False).reset_index(drop=True)
-        
-        # Find the index of the address, which will be its rank
-        rank = sorted_df[sorted_df['HolderAddress'] == address].index[0] + 1  # Adding 1 because index starts at 0
-        
-        amount = df[df['HolderAddress'] == address]['Balance'].values[0]
-        st.success(f"OOGA BOOGA! You're still a SBERM 🐻 wallet rank {rank} with an amount of {amount:.2f} $BGT")
+        if balance >= 1000:
+            st.success(f"OOGA BOOGA! BIG FAT BEAR 🐻🐻🐻 wallet rank {rank} with an amount of {balance:.2f} $BGT")
+        elif balance >= 100:
+            st.success(f"OOGA BOOGA! CHUBBY BEAR 🐻🐻 wallet rank {rank} with an amount of {balance:.2f} $BGT")
+        elif balance >= 10:
+            st.success(f"OOGA BOOGA! little BEAR cub 🐻 wallet rank {rank} with an amount of {balance:.2f} $BGT")
+        elif balance >= 1:
+            st.success(f"OOGA BOOGA! You're still a SBERM 🐻 wallet rank {rank} with an amount of {balance:.2f} $BGT")
+        else:
+            st.error("You're not even a BEAR 🐻 get outta here! (this dashboard only shows wallets holding >= 1 BGT).")
     else:
-        st.error("You're not even a BEAR 🐻 get outta here! (this dashboard only show wallet that holding >= 1 BGT).")
+        st.error("You're not even a BEAR 🐻 get outta here! (this dashboard only shows wallets holding >= 1 BGT).")
 
 ########################################################################################
 ########################################################################################
@@ -179,7 +168,6 @@ st.link_button("Telegram",'https://t.me/sapiensp')
 st.link_button("Twitter",'https://x.com/0xsapiensp')
 
 
-
 # Add "Buy Me a Coffee" message with donation address
 st.markdown("---")
 st.subheader("☕️ Support My Work 🙏")
@@ -187,3 +175,4 @@ st.markdown("If you find this tool helpful, consider buying me a coffee! ✨")
 st.markdown("To support, send donation to:")
 st.code("0xcD6e45Aa577dd494C619D02Fc302f2FBBC3c6D29", language="text")
 st.markdown("Your support keeps me caffeinated and updating! 💖")
+
