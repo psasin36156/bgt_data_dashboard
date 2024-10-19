@@ -32,7 +32,7 @@ st.markdown("<br>", unsafe_allow_html=True)
 # Load the CSV file
 @st.cache_data(ttl=3600)
 def load_data():
-    return pd.read_csv('clean_bgt_14OCT2024.csv')
+    return pd.read_csv('clean_bgt_19OCT2024.csv')
 
 df = load_data()
 
@@ -154,7 +154,7 @@ st.subheader("Top 20 Wallets (without team wallet)")
 top_20 = df.nlargest(20, 'Balance')[['HolderAddress', 'Balance']]
 st.table(top_20.reset_index(drop=True))
 # Add footer with additional information
-st.info("⚠️ This is not a real time data (around 3 days delay 🥺)")
+st.info("⚠️ This is not a real time data (last updated 19OCT2024)")
 
 ########################################################################################
 ########################################################################################
