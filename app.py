@@ -32,7 +32,7 @@ st.markdown("<br>", unsafe_allow_html=True)
 # Load the CSV file
 @st.cache_data(ttl=3600)
 def load_data():
-    return pd.read_csv('clean_bgt_21OCT2024.csv')
+    return pd.read_csv('clean_bgt_31OCT2024.csv')
 
 df = load_data()
 
