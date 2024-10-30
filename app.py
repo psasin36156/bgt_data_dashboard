@@ -154,7 +154,7 @@ st.subheader("Top 20 Wallets (without team wallet)")
 top_20 = df.nlargest(20, 'Balance')[['HolderAddress', 'Balance']]
 st.table(top_20.reset_index(drop=True))
 # Add footer with additional information
-st.info("⚠️ This is not a real time data (last updated 21OCT2024 7:30PM UTC+7)")
+st.info("⚠️ This is not a real time data (last updated 31OCT2024 10:30AM UTC+7)")
 
 ########################################################################################
 ########################################################################################
