@@ -32,14 +32,14 @@ st.markdown("<br>", unsafe_allow_html=True)
 # Load the CSV file
 @st.cache_data(ttl=3600)
 def load_data():
-    return pd.read_csv('clean_bgt_31OCT2024.csv')
+    return pd.read_csv('clean_bgt_12DEC2024.csv')
 
 df = load_data()
 
 # Set page title
 st.title("$BGT Rank Finder")
 
-st.info("⚠️ Note: This webapp only shows addresses holding more than 1 BGT.")
+st.info("⚠️ Note: This webapp only shows addresses holding more than 1 BGT. (last updated 12DEC2024 10:30AM UTC+7)")
 
 ########################################################################################
 ########################################################################################
@@ -154,7 +154,7 @@ st.subheader("Top 20 Wallets (without team wallet)")
 top_20 = df.nlargest(20, 'Balance')[['HolderAddress', 'Balance']]
 st.table(top_20.reset_index(drop=True))
 # Add footer with additional information
-st.info("⚠️ This is not a real time data (last updated 31OCT2024 10:30AM UTC+7)")
+st.info("⚠️ This is not a real time data ")
 
 ########################################################################################
 ########################################################################################
