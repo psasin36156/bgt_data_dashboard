@@ -32,14 +32,14 @@ st.markdown("<br>", unsafe_allow_html=True)
 # Load the CSV file
 @st.cache_data(ttl=3600)
 def load_data():
-    return pd.read_csv('clean_bgt_12DEC2024.csv')
+    return pd.read_csv('clean_bgt_13DEC2024.csv')
 
 df = load_data()
 
 # Set page title
 st.title("$BGT Rank Finder")
 
-st.info("⚠️ Note: This webapp only shows addresses holding more than 1 BGT. (last updated 12DEC2024 10:30AM UTC+7)")
+st.info("⚠️ Note: This webapp only shows addresses holding more than 1 BGT. (last updated 13DEC2024 13:00 UTC+7)")
 
 ########################################################################################
 ########################################################################################
